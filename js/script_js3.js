@@ -211,7 +211,7 @@ function displayWeather(result)
 // var indiaTime = new Date().toLocaleString("en-US", {timeZone: "Asia/Kolkata"});
 // indiaTime = new Date(indiaTime);
 // console.log('India time: '+indiaTime.toLocaleString())
-//         var date = new Date(weather.date_time1);
+        var date = new Date(weather.date_time1);
 
         console.log(date);
         // date.toGMTString();
