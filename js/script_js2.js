@@ -1,8 +1,25 @@
 const apiID="186e28de3dbdf39c5e63c7f4f3c1c7b9";
 
-const cityID='1277333';
-getWeather(cityID);
-getFutureWeather(cityID);
+document.addEventListener('load',getLocation());
+
+
+function getLocation()
+{
+  if (navigator.geolocation) 
+  {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else { 
+    alert("Geolocation is not supported by this browser.");
+  }
+}
+
+function showPosition(position) {
+  let latitude=position.coords.latitude ;
+  let longitude=position.coords.longitude;
+  getWeather(latitude,longitude);
+  getFutureWeather(latitude,longitude);
+}
+
 
 
 let countryName=document.getElementById("country");
@@ -31,11 +48,10 @@ let countryname;
 let cnt;
 let bkimage;
 
-document.addEventListener('load',getFutureWeather("1277333"));
 
-function getFutureWeather(cityID)
+function getFutureWeather(latitude,longitude)
 {
-  let api=`https://api.openweathermap.org/data/2.5/forecast?id=${cityID}&units=metric&APPID=${apiID}`;
+  let api=`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&units=metric&APPID=${apiID}`;
   
   fetch(api)
     .then(result => {
@@ -62,7 +78,7 @@ function getFutureWeather(cityID)
       }
     })
     .then(result=>{
-      // displayFutureWeather(result);
+     
  
       displayFutureWeather(result,cityname,countryname,cnt,bkimage,mintemperature,maxtemperature,iconId,date_time);
     })
@@ -73,12 +89,7 @@ function displayFutureWeather(result,cityname,countryname,cnt,bkimage,mintempera
       for(let i=1;i<5;i++)
       {
 
-        // let iconElement=document.getElementById("imgIcon");
-        // let minTemp=document.getElementById("minTemp");
-        // let maxTemp=document.getElementById("maxTemp");
-
-          
-        // iconElement[i].innerHTML="HII";
+        
        iconElement[i].innerHTML=`<img src="http://openweathermap.org/img/w/${iconId[i]}.png"/>`;
        minTemp[i].innerHTML=`${mintemperature[i]} 	&deg; `;
        maxTemp[i].innerHTML=` ${maxtemperature[i]} 	&deg;`;
@@ -116,9 +127,9 @@ function displayFutureWeather(result,cityname,countryname,cnt,bkimage,mintempera
         }    
 }
 
-function getWeather(cityID)
+function getWeather(latitude,longitude)
 {
-  let api=`https://api.openweathermap.org/data/2.5/weather?id=${cityID}&units=metric&APPID=${apiID}`;
+  let api=`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&APPID=${apiID}`;
   
   fetch(api)
     .then(result => {
@@ -134,8 +145,8 @@ function getWeather(cityID)
         weather.date_time1=result.dt*1000;
         // weather.timezone1=result.timezone;
         weather.image=result.weather[0].main;
-        console.log(result);
-// console.log(weather.date_time);
+        // console.log( weather.date_time1);
+
 
     })
     .then(result=>{
@@ -146,7 +157,7 @@ function getWeather(cityID)
 
 function displayWeather(result)
 {
-          // console.log(result.weather[0].main);
+         
           iconElement[0].innerHTML=`<img src="http://openweathermap.org/img/w/${weather.iconId1}.png"/>`;
           minTemp[0].innerHTML=`${weather.mintemperature1.value} 	&deg; `;
           maxTemp[0].innerHTML=` ${weather.maxtemperature1.value} 	&deg;`;
@@ -191,65 +202,46 @@ function displayWeather(result)
                 backImage.style.backgroundImage="url('images/sunny.jpg')";
               break;
           }
-        // let dateAndTime=`"${weather.date_time1}"`;
-        // var diff=weather.date_time1-weather.timezone1;
-        // var date = new Date(diff);
-
-//
-//         var aestTime = new Date().toLocaleString("en-US", {timeZone: "Europe/Amsterdam"});
-// aestTime = new Date(aestTime);
-// console.log('AEST time: '+aestTime.toLocaleString());
+        
 
 switch( weather.cityname)
 {
-  case 'Amsterdam': var aestTime = new Date().toLocaleString("en-US", {timeZone: "Europe/Amsterdam"});
-                    date = new Date(aestTime);
+  case 'Amsterdam': var actualTime = new Date().toLocaleString("en-US", {timeZone: "Europe/Amsterdam"});
+                    date = new Date(actualTime);
                     date.toLocaleString();
 
 
     break;
-  case 'Bangalore':var aestTime = new Date().toLocaleString("en-US", {timeZone: "Asia/Kolkata"});
-  date = new Date(aestTime);
+  case 'Bangalore':var actualTime = new Date().toLocaleString("en-US", {timeZone: "Asia/Kolkata"});
+  date = new Date(actualTime);
   date.toLocaleString();
   break;
-  case  'London':var aestTime = new Date().toLocaleString("en-US", {timeZone: "Europe/London"});
-  date = new Date(aestTime);
+  case  'London':var actualTime = new Date().toLocaleString("en-US", {timeZone: "Europe/London"});
+  date = new Date(actualTime);
   date.toLocaleString();
     break;
 
-  case 'Chicago':var aestTime = new Date().toLocaleString("en-US", {timeZone: "America/Chicago"});
-  date = new Date(aestTime);
+  case 'Chicago':var actualTime = new Date().toLocaleString("en-US", {timeZone: "America/Chicago"});
+  date = new Date(actualTime);
   date.toLocaleString();
     break;
-  case 'Abu Dhabi':var aestTime = new Date().toLocaleString("en-US", {timeZone: "Asia/Dubai"});
-  date = new Date(aestTime);
+  case 'Abu Dhabi':var actualTime = new Date().toLocaleString("en-US", {timeZone: "Asia/Dubai"});
+  date = new Date(actualTime);
   date.toLocaleString();
   break;
 
-  case 'New York':var aestTime = new Date().toLocaleString("en-US", {timeZone: "America/New_York"});
-  date = new Date(aestTime);
+  case 'New York':var actualTime = new Date().toLocaleString("en-US", {timeZone: "America/New_York"});
+  date = new Date(actualTime);
   date.toLocaleString();
     break;
 }
 
-// var asiaTime = new Date().toLocaleString("en-US", {timeZone: "Asia/Shanghai"});
-// asiaTime = new Date(asiaTime);
-// console.log('Asia time: '+asiaTime.toLocaleString())
 
-// var usaTime = new Date().toLocaleString("en-US", {timeZone: "America/New_York"});
-// usaTime = new Date(usaTime);
-// console.log('USA time: '+usaTime.toLocaleString())
+// var n=weather.date_time1-weather.timezone1
+// weather.timezone1=result.timezone*1000;
 
-// var indiaTime = new Date().toLocaleString("en-US", {timeZone: "Asia/Kolkata"});
-// indiaTime = new Date(indiaTime);
-// console.log('India time: '+indiaTime.toLocaleString())
-        // var date = new Date(weather.date_time1);
-
-        console.log(date);
-        // date.toGMTString();
-        // console.log(date);
-
-        // let date = new Date();
+// var dddd=new Date(n);
+// console.log(dddd);
         let hrs = date.getHours();
 
         var dd = date.getDate();
