@@ -191,14 +191,46 @@ function displayWeather(result)
                 backImage.style.backgroundImage="url('images/sunny.jpg')";
               break;
           }
-        // let dateAndTime=`"${weather.date_time}"`;
+        // let dateAndTime=`"${weather.date_time1}"`;
         // var diff=weather.date_time1-weather.timezone1;
         // var date = new Date(diff);
 
-
-//         var aestTime = new Date().toLocaleString("en-US", {timeZone: "Australia/Brisbane"});
+//
+//         var aestTime = new Date().toLocaleString("en-US", {timeZone: "Europe/Amsterdam"});
 // aestTime = new Date(aestTime);
-// console.log('AEST time: '+aestTime.toLocaleString())
+// console.log('AEST time: '+aestTime.toLocaleString());
+
+switch( weather.cityname)
+{
+  case 'Amsterdam': var aestTime = new Date().toLocaleString("en-US", {timeZone: "Europe/Amsterdam"});
+                    date = new Date(aestTime);
+                    date.toLocaleString();
+
+
+    break;
+  case 'Bangalore':var aestTime = new Date().toLocaleString("en-US", {timeZone: "Asia/Kolkata"});
+  date = new Date(aestTime);
+  date.toLocaleString();
+  break;
+  case  'London':var aestTime = new Date().toLocaleString("en-US", {timeZone: "Europe/London"});
+  date = new Date(aestTime);
+  date.toLocaleString();
+    break;
+
+  case 'Chicago':var aestTime = new Date().toLocaleString("en-US", {timeZone: "America/Chicago"});
+  date = new Date(aestTime);
+  date.toLocaleString();
+    break;
+  case 'Abu Dhabi':var aestTime = new Date().toLocaleString("en-US", {timeZone: "Asia/Dubai"});
+  date = new Date(aestTime);
+  date.toLocaleString();
+  break;
+
+  case 'New York':var aestTime = new Date().toLocaleString("en-US", {timeZone: "America/New_York"});
+  date = new Date(aestTime);
+  date.toLocaleString();
+    break;
+}
 
 // var asiaTime = new Date().toLocaleString("en-US", {timeZone: "Asia/Shanghai"});
 // asiaTime = new Date(asiaTime);
@@ -211,7 +243,7 @@ function displayWeather(result)
 // var indiaTime = new Date().toLocaleString("en-US", {timeZone: "Asia/Kolkata"});
 // indiaTime = new Date(indiaTime);
 // console.log('India time: '+indiaTime.toLocaleString())
-        var date = new Date(weather.date_time1);
+        // var date = new Date(weather.date_time1);
 
         console.log(date);
         // date.toGMTString();
